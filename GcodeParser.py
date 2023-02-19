@@ -98,6 +98,8 @@ class Parser:
         for i in range(self.startPoint,self.endPoint):
             self.shortendCmds.append(self.commands[i])
 
+
+#Example of how the class works
 if __name__ == "__main__":
     exampleParse = Parser('example.gcode', (200,0,0))
     exampleParse.parse_gcode()

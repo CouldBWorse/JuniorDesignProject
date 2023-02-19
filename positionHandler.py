@@ -51,7 +51,8 @@ class posHandler:
             except ValueError:
                 print(i)
                 raise InvalidPosition()
-        
+
+#Example of how the class works
 if __name__ == "__main__":
     parse = Parser('example.gcode',(370,0,0))
     parse.parse_gcode()
