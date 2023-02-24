@@ -30,15 +30,14 @@ class posHandler:
                 k=nextPos[1]
                 r = self.r
                 l = self.l
+                c = math.sqrt(h**2+k**2)
 
                 a = ((k*math.sqrt(-r**4+2*(h**2+k**2+l**2)*r**2-h**4-2*h**2*(k**2-l**2)-k**4+2*k**2*l**2-l**4)+h*(r**2+h**2+k**2-l**2))/(2*(h**2+k**2)))
                 b = (-(h*math.sqrt(-r**4+2*(h**2+k**2+l**2)*r**2-h**4-2*h**2*(k**2-l**2)-k**4+2*k**2*l**2-l**4)-k*(r**2+h**2+k**2-l**2))/(2*(h**2+k**2)))
                 
                 u = math.degrees(math.atan(b/a))
-                v = math.degrees(math.atan((b-k)/(a-h)))
+                v = 180-math.degrees(math.acos((l**2+r**2-c**2)/(2*l*r)))
 
-                if v < 0:
-                    v = v + 180
                 
                 if u == -0:
                     u = 0
@@ -54,10 +53,10 @@ class posHandler:
 
 #Example of how the class works
 if __name__ == "__main__":
-    parse = Parser('example.gcode',(370,0,0))
+    parse = Parser('example2.gcode',(374,0,0))
     parse.parse_gcode()
     parse.defCmds()
 
-    example = posHandler(parse.positions,parse.shortendCmds,170,200)
+    example = posHandler(parse.positions,parse.shortendCmds,174,200)
     example.calcAngles()
     print(example.stepsList)
