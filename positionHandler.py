@@ -16,6 +16,7 @@ class posHandler:
         self.l = arm2
         self.angleList = []
         self.stepsList = []
+        self.servoList = []
     
 
     def calcAngles(self):
@@ -47,6 +48,7 @@ class posHandler:
                 u = round(u / 1.8,0)
                 v = round(v / 1.8,0)
                 self.stepsList.append((u,v))
+                self.servoList.append(nextPos[2])
             except ValueError:
                 print(i)
                 raise InvalidPosition()
@@ -59,4 +61,4 @@ if __name__ == "__main__":
 
     example = posHandler(parse.positions,parse.shortendCmds,174,200)
     example.calcAngles()
-    print(example.stepsList)
+    print(example.servoList)
