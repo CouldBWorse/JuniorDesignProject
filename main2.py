@@ -1,11 +1,11 @@
 from GcodeParser import Parser
 from positionHandler import posHandler
 from dualStepperMotor import dualMotor
+from gpiozero import Servo
 import time
-from servoSetup import Setup
+
 
 motors = dualMotor(20 , 21, 19, 26)
-servo = Setup(17,0)
 arm1 = 174
 arm2 = 200
 homePos = (arm1 + arm2,0,0)
@@ -14,29 +14,39 @@ stps2 = []
 servoLst = []
 delay = 0.03
 
+servo_pin = 17
+servo = Servo(servo_pin)
+
 def setUp(filename: str, homePos: tuple):
-    parse = Parser(filename, homePos)
-    parse.parse_gcode()
-    parse.defCmds()
+    exampleParse = Parser(filename, homePos)
+    exampleParse.parse_gcode()
+    exampleParse.defCmds()
 
-    position = posHandler(parse.positions,parse.shortendCmds,arm1,arm2)
-    position.calcAngles()
-    position.stepsList.insert(0,(0,0))
-    servoLst = position.servoList
-    print(position.stepsList)
+    example = posHandler(exampleParse.positions,exampleParse.shortendCmds,arm1,arm2)
+    example.calcAngles()
+    example.stepsList.insert(0,(0,0))
+    example.servoList.insert(0,1)
+
+
+    for i in range(len(example.servoList)):
+        servoLst.append(example.servoList[i])
     
-
-    for tup in position.stepsList:
+    for tup in example.stepsList:
         stps1.append(tup[0])
         stps2.append(tup[1])
+        
+    print(example.stepsList)
+    print(servoLst)
+        
     
 def run():
     for i in range(len(stps1)):
-        servo.servoMove(servoLst[i])
+        servo.value = servoLst[i]
         motors.goTo(int(stps1[i]),int(stps2[i]), delay)
         print("Motor Positions: (" + str(motors.Pos1) + ", " + str(motors.Pos2) +" )")
         time.sleep(1)
 
 if __name__=="__main__":
     setUp('example.gcode',homePos)
+    print(stps1)
     run()

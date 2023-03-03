@@ -48,14 +48,14 @@ class posHandler:
                 u = round(u / 1.8,0)
                 v = round(v / 1.8,0)
                 self.stepsList.append((u,v))
-                self.servoList.append(nextPos[2])
+                self.servoList.append(int(nextPos[2]))
             except ValueError:
                 print(i)
                 raise InvalidPosition()
 
 #Example of how the class works
 if __name__ == "__main__":
-    parse = Parser('example2.gcode',(374,0,0))
+    parse = Parser('example.gcode',(374,0,0))
     parse.parse_gcode()
     parse.defCmds()
 
