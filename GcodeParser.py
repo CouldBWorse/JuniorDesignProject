@@ -101,7 +101,7 @@ class Parser:
 
 #Example of how the class works
 if __name__ == "__main__":
-    exampleParse = Parser('example2.gcode', (374,0,0))
+    exampleParse = Parser('TwoSquares.gcode', (374,0,1))
     exampleParse.parse_gcode()
     exampleParse.defCmds()
     exampleParse.print_gcode()

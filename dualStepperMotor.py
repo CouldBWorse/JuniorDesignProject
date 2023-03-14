@@ -34,6 +34,8 @@ class dualMotor:
         
         if steps1 < 0 and self.Pos1 + steps1 < 0:
             limit1 = 200+(self.Pos1 + steps1)
+        elif self.Pos1 + steps1 > 200:
+            limit1 = (self.Pos1 + steps1)-200
         else:
             limit1 = self.Pos1 + steps1
         
@@ -114,16 +116,15 @@ class dualMotor:
 
 
 if __name__ == "__main__":
-    motors = dualMotor(20 , 21, 19, 26)
-    motors.goTo(-33,81,0.01)
+    motors = dualMotor(6, 5, 9, 11)
+    motors.goTo(0,0,0.02)
     print(motors.Pos1)
     print(motors.Pos2)
-    time.sleep(0.5)
-    motors.goTo(22,33,0.01)
+    time.sleep(1)
+    motors.goTo(-38,76,0.01)
     print(motors.Pos1)
     print(motors.Pos2)
-    time.sleep(0.5)
-    motors.goTo(0,0,0.01)
-    print(motors.Pos1)
-    print(motors.Pos2)
+    time.sleep(1)
+    
+    
     

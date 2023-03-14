@@ -16,6 +16,7 @@ class posHandler:
         self.l = arm2
         self.angleList = []
         self.stepsList = []
+        self.servoList = []
     
 
     def calcAngles(self):
@@ -47,16 +48,17 @@ class posHandler:
                 u = round(u / 1.8,0)
                 v = round(v / 1.8,0)
                 self.stepsList.append((u,v))
+                self.servoList.append(int(nextPos[2]))
             except ValueError:
                 print(i)
                 raise InvalidPosition()
 
 #Example of how the class works
 if __name__ == "__main__":
-    parse = Parser('example2.gcode',(374,0,0))
+    parse = Parser('example.gcode',(374,0,0))
     parse.parse_gcode()
     parse.defCmds()
 
     example = posHandler(parse.positions,parse.shortendCmds,174,200)
     example.calcAngles()
-    print(example.stepsList)
+    print(example.servoList)
