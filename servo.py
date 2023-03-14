@@ -20,7 +20,7 @@ class Setup:
 
 
 if __name__ == "__main__":
-    servo = Setup(17,0)
+    servo = Setup(22,0)
     servo.servoMove(1)
     sleep(0.5)
     servo.servoMove(-1)

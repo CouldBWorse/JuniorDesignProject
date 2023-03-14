@@ -1,7 +1,7 @@
 from gpiozero import Servo
 from time import sleep
 
-servo_pin = 17
+servo_pin = 22
 servo = Servo(servo_pin)
 def move_servo(positions):
     for pos in positions:
